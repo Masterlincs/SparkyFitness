@@ -92,7 +92,7 @@ function buildWorkbook(): Buffer {
         'N',
       ],
       [
-        ...food('13-669', 'Aubergine, roasted', 'DG'),
+        ...food('13-669', "Aubergine, roasted, cook's recipe", 'DG'),
         2.1,
         3.8,
         5.2,
@@ -126,7 +126,7 @@ function buildWorkbook(): Buffer {
         1.4,
       ],
       [...food('17-752', 'Wine, red', 'QE'), 7, 0.9],
-      [...food('13-669', 'Aubergine, roasted', 'DG'), 2, 'Tr'],
+      [...food('13-669', "Aubergine, roasted, cook's recipe", 'DG'), 2, 'Tr'],
       [...food('13-669', 'Watercress, raw', 'DG'), 37, 2.2],
     ],
     '1.5 Vitamins': [
@@ -171,7 +171,9 @@ describe('cofidService - parseCofidWorkbook', () => {
   it('keeps foods that share a code apart', () => {
     const dataset = parseCofidWorkbook(buildWorkbook());
 
-    expect(dataset.byCode.get('13-669')?.name).toBe('Aubergine, roasted');
+    expect(dataset.byCode.get('13-669')?.name).toBe(
+      "Aubergine, roasted, cook's recipe"
+    );
     expect(dataset.byCode.get('13-669')?.values.NA).toBe(2);
     expect(dataset.byCode.get('13-669#2')?.name).toBe('Watercress, raw');
     expect(dataset.byCode.get('13-669#2')?.values.NA).toBe(37);
@@ -292,6 +294,20 @@ describe('cofidService - search and details', () => {
     });
     expect(roasted.foods.map((f) => f.provider_external_id)).toEqual([
       '13-669',
+    ]);
+  });
+
+  it('ignores apostrophes and punctuation in names and queries', async () => {
+    respondWithWorkbook();
+
+    const plain = await searchCofidFoods('cooks recipe');
+    const quoted = await searchCofidFoods('Cook’s');
+    const commas = await searchCofidFoods('watercress, raw');
+
+    expect(plain.foods.map((f) => f.provider_external_id)).toEqual(['13-669']);
+    expect(quoted.foods.map((f) => f.provider_external_id)).toEqual(['13-669']);
+    expect(commas.foods.map((f) => f.provider_external_id)).toEqual([
+      '13-669#2',
     ]);
   });
 

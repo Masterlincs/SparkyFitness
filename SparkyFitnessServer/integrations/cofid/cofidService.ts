@@ -301,11 +301,21 @@ export async function getCofidFoodDetails(
   return food ? mapCofidFood(food, dataset.columns) : null;
 }
 
+// "Shepherd's pie" matches "shepherds pie"; commas and brackets in CoFID names
+// ("Beans, baked") do not get in the way of a term.
+function searchText(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/['’]/g, '')
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .trim();
+}
+
 export async function searchCofidFoods(query: string, page = 1, pageSize = 20) {
   const dataset = await getCofidDataset();
-  const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const terms = searchText(query).split(' ').filter(Boolean);
   const matched = dataset.foods.filter((food) => {
-    const name = food.name.toLowerCase();
+    const name = searchText(food.name);
     return terms.every((term) => name.includes(term));
   });
 
