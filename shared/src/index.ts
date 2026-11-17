@@ -395,3 +395,4 @@ export * from './utils/chatTools.ts';
 export * from './utils/nutriscore.ts';
 export * from './utils/foodPhraseParser.ts';
 export * from './schemas/api/QuickLog.api.zod.ts';
+export * from './schemas/api/MealPlanBuilder.api.zod.ts';

@@ -235,7 +235,8 @@ async function datasetCandidates(
   ];
 }
 
-async function matchPhrase(
+/** Finds a food and portion for one parsed phrase or recipe line. */
+export async function matchPhrase(
   userId: string,
   phrase: ParsedFoodPhrase
 ): Promise<PhraseMatch> {

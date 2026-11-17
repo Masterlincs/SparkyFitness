@@ -163,6 +163,7 @@ export default defineConfig({
             { text: 'Food Search', link: '/features/food/food-search' },
             { text: 'Shopping List', link: '/features/food/shopping-list' },
             { text: 'Log by Voice or Text', link: '/features/food/voice-logging' },
+            { text: 'Meal Plans and Recipes', link: '/features/food/meal-plans-and-recipes' },
           ],
         },
         {

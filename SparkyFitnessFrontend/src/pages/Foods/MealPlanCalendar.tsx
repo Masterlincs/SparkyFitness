@@ -9,6 +9,8 @@ import { debug } from '@/utils/logging';
 import { toast } from '@/hooks/use-toast';
 import type { MealPlanTemplate } from '@/types/meal';
 import MealPlanTemplateForm from './MealPlanTemplateForm';
+import StarterRecipesDialog from './StarterRecipesDialog';
+import GenerateMealPlanDialog from './GenerateMealPlanDialog';
 import {
   Edit,
   Plus,
@@ -19,6 +21,8 @@ import {
   MoreHorizontal,
   Copy,
   ShoppingCart,
+  BookOpen,
+  Sparkles,
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -60,6 +64,8 @@ const MealPlanCalendar: React.FC = () => {
   const invalidate = useFoodEntryInvalidation();
   const { data: templates, isLoading } = useMealPlanTemplates(activeUserId);
   const addToShoppingList = useAddMealPlanToShoppingListMutation();
+  const [isStarterOpen, setIsStarterOpen] = useState(false);
+  const [isGenerateOpen, setIsGenerateOpen] = useState(false);
   const { mutateAsync: addMealPlanToShoppingList } = addToShoppingList;
   const handleAddToShoppingList = useCallback(
     async (templateId: string) => {
@@ -424,6 +430,38 @@ const MealPlanCalendar: React.FC = () => {
             {t('mealPlanCalendar.title')}
           </CardTitle>
           <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size={isMobile ? 'icon' : 'default'}
+              onClick={() => setIsStarterOpen(true)}
+              className="shrink-0"
+              title={t('mealPlanBuilder.starterTitle', 'Starter recipes')}
+            >
+              <BookOpen className={isMobile ? 'h-5 w-5' : 'h-4 w-4 mr-2'} />
+              {!isMobile && (
+                <span>
+                  {t('mealPlanBuilder.starterTitle', 'Starter recipes')}
+                </span>
+              )}
+            </Button>
+            <Button
+              variant="outline"
+              size={isMobile ? 'icon' : 'default'}
+              onClick={() => setIsGenerateOpen(true)}
+              className="shrink-0"
+              title={t('mealPlanBuilder.generateShort', 'Generate')}
+            >
+              <Sparkles className={isMobile ? 'h-5 w-5' : 'h-4 w-4 mr-2'} />
+              {!isMobile && (
+                <span>{t('mealPlanBuilder.generateShort', 'Generate')}</span>
+              )}
+            </Button>
+            {isStarterOpen && (
+              <StarterRecipesDialog open onOpenChange={setIsStarterOpen} />
+            )}
+            {isGenerateOpen && (
+              <GenerateMealPlanDialog open onOpenChange={setIsGenerateOpen} />
+            )}
             <Button
               variant="outline"
               size={isMobile ? 'icon' : 'default'}

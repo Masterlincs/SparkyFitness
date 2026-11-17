@@ -11223,5 +11223,32 @@
       "intake24": "Intake24",
       "cofid": "CoFID"
     }
+  },
+  "mealPlanBuilder": {
+    "starterTitle": "Starter recipes",
+    "generateShort": "Generate",
+    "starterDescription": "British and Irish recipes from the Wikibooks Cookbook (CC BY-SA 4.0). Importing one saves it as a meal, with its ingredients matched to UK foods. Check the result: home recipes are community-written, not dietitian-written.",
+    "filterRecipes": "Filter recipes",
+    "import": "Import",
+    "imported": "Imported",
+    "importedDetail": "{{matched}} ingredients matched, about {{calories}} kcal a serving.",
+    "leftOut": "Left out: {{lines}}",
+    "failedToLoadRecipes": "Could not load starter recipes from Wikibooks.",
+    "failedToImport": "Could not import that recipe.",
+    "generateTitle": "Generate a meal plan",
+    "generateDescription": "Builds a week of breakfasts, lunches, dinners and snacks around your calorie target. Nothing is logged until you turn the plan on.",
+    "fromMyMeals": "From my saved meals",
+    "aiWritten": "AI-written recipes",
+    "fromMyMealsHint": "Uses your saved meals, including imported starter recipes and Mealie recipes.",
+    "aiHint": "Your AI service writes about 13 recipes, which are saved as meals with ingredients matched to UK foods. AI recipes are not reviewed by a dietitian. This uses your AI provider and can take a few minutes.",
+    "startDate": "Start date",
+    "dailyCalories": "kcal a day (optional)",
+    "yourGoal": "Your goal",
+    "preferences": "Preferences and allergies",
+    "preferencesPlaceholder": "vegetarian, no mushrooms, quick weekday dinners",
+    "generate": "Generate plan",
+    "planCreated": "Meal plan \"{{name}}\" created",
+    "planCreatedDetail": "About {{calories}} kcal a day. It is switched off: review it in Meal Plans, then turn it on.",
+    "planFailed": "Could not create the plan"
   }
 }
