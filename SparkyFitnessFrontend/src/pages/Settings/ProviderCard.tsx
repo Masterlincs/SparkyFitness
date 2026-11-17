@@ -135,6 +135,10 @@ const PROVIDER_PORTALS: Record<string, { label: string; url: string }> = {
     label: 'Swedish Food Agency (Livsmedelsverket) Open Data',
     url: 'https://www.livsmedelsverket.se/en/about-us/open-data/food-composition-data/',
   },
+  cofid: {
+    label: 'CoFID on GOV.UK',
+    url: 'https://www.gov.uk/government/publications/composition-of-foods-integrated-dataset-cofid',
+  },
 };
 
 export const ProviderCard = ({
@@ -808,6 +812,33 @@ export const ProviderCard = ({
                 link: (
                   <a
                     href="https://naehrwertdaten.ch/en/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline font-medium ml-1"
+                  />
+                ),
+              }}
+            />
+          </p>
+        )}
+
+        {provider.provider_type === 'cofid' && (
+          <p className="text-xs text-muted-foreground mt-1.5 max-w-2xl leading-relaxed">
+            <Trans
+              i18nKey="settings.cofid.providerCardLicence"
+              defaults="Contains public sector information licensed under the <1>Open Government Licence v3.0</1>, from McCance and Widdowson's Composition of Foods Integrated Dataset 2021. Values are per 100 g (per 100 ml for alcoholic drinks). English only. <3>CoFID on GOV.UK</3>"
+              components={{
+                1: (
+                  <a
+                    href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline font-medium"
+                  />
+                ),
+                3: (
+                  <a
+                    href="https://www.gov.uk/government/publications/composition-of-foods-integrated-dataset-cofid"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary hover:underline font-medium ml-1"

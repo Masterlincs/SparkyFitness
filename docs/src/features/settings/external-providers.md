@@ -20,6 +20,7 @@ SparkyFitness supports integration with the following health and fitness data pr
 - [Intervals.icu](/features/settings/intervals)
 - [Canadian Nutrient File (Health Canada)](/features/settings/canadian-nutrient-file)
 - [Swedish Food Agency (Livsmedelsverket)](/features/settings/livsmedelsverket)
+- [McCance and Widdowson's CoFID (UK)](/features/settings/cofid)
 - Swiss Food Composition Database
 - OpenFoodFacts
 - USDA
@@ -96,6 +97,14 @@ The Swedish Food Agency (_Livsmedelsverket_) publishes the authoritative Swedish
 SparkyFitness supports both **live on-demand search** across the official open data API in Swedish and English, as well as **offline bulk catalog import** to cache the entire catalog locally.
 
 For setup instructions, import options, and licensing information, see the [Swedish Food Agency Documentation](/features/settings/livsmedelsverket).
+
+## McCance and Widdowson's CoFID (UK)
+
+McCance and Widdowson's Composition of Foods Integrated Dataset (CoFID) is the UK's official food composition table, with about 2,900 generic foods eaten in the UK. It is published on GOV.UK under the Open Government Licence v3.0, requires no credentials and is enabled by default.
+
+SparkyFitness supports **live on-demand search** of CoFID. The server downloads the dataset from GOV.UK on the first search and keeps it in memory.
+
+For details and licensing information, see the [CoFID Documentation](/features/settings/cofid).
 
 ## Open Food Facts Accounts and Contributions
 

@@ -810,6 +810,18 @@ const EnhancedFoodSearch = ({
           hasMore: data.pagination?.hasMore ?? false,
         };
       },
+      cofid: async (term, id, _provider, page) => {
+        const data = await queryClient.fetchQuery(
+          searchFoodsV2Options('cofid', term, id, undefined, undefined, page)
+        );
+        return {
+          items: data.foods.map((food: Food) => ({
+            provider_type: 'cofid' as const,
+            food,
+          })),
+          hasMore: data.pagination?.hasMore ?? false,
+        };
+      },
     }),
     [queryClient, autoScaleOpenFoodFactsImports, itemDisplayLimit]
   );

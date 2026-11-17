@@ -99,6 +99,7 @@ SparkyFitness can sync data from multiple health and fitness platforms:
 - **Swiss Food Database**
 - **Canadian Nutrient File (Health Canada)**
 - **Swedish Food Agency (Livsmedelsverket)**
+- **McCance and Widdowson's CoFID (UK)**
 - **Free Exercise DB** (Github)
 - **Wger**
 - **Intervals.ICU**

@@ -29,6 +29,7 @@ import { getYazioFoodDetails } from '../integrations/yazio/yazioService.js';
 import { getSwissFoodDetails } from '../integrations/swissfood/swissFoodService.js';
 import { getCanadianNutrientFoodDetails } from '../integrations/cnf/cnfService.js';
 import { getLivsmedelsverketFoodDetails } from '../integrations/livsmedelsverket/livsmedelsverketService.js';
+import { getCofidFoodDetails } from '../integrations/cofid/cofidService.js';
 import {
   getFatSecretNutrients,
   getMealieFoodDetails,
@@ -333,6 +334,10 @@ export async function fetchProviderFoodDetails({
           credentials.base_url || undefined
         )) ?? null
       );
+    }
+
+    case 'cofid': {
+      return await getCofidFoodDetails(externalId);
     }
   }
 

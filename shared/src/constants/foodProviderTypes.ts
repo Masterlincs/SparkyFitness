@@ -20,6 +20,7 @@ export const FOOD_PROVIDER_TYPES = [
   'swissfood',
   'canadian-nutrient-file',
   'livsmedelsverket',
+  'cofid',
 ] as const;
 
 export type FoodProviderType = (typeof FOOD_PROVIDER_TYPES)[number];
@@ -138,6 +139,21 @@ export const FOOD_PROVIDER_REGISTRY: Record<
     licenseName: 'Creative Commons Attribution 4.0 (CC BY 4.0)',
     licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
     attributionText: 'Swedish Food Agency (Livsmedelsverket)',
+  },
+  cofid: {
+    id: 'cofid',
+    displayName: "McCance and Widdowson's CoFID (UK)",
+    isPublic: true,
+    needsDetailFetch: true,
+    supportsBarcode: false,
+    supportsBulkImport: false,
+    supportedLanguages: ['en'],
+    defaultLanguage: 'en',
+    licenseName: 'Open Government Licence v3.0',
+    licenseUrl:
+      'https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/',
+    attributionText:
+      "McCance and Widdowson's The Composition of Foods Integrated Dataset 2021",
   },
 };
 

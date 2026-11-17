@@ -2420,6 +2420,10 @@
       "confirmDeleteMessage": "This will permanently delete all Swedish Food Agency items from your personal food library. Past food diary entries logged from these items will be preserved.",
       "providerCardLicence": "Contains information published by the Swedish Food Agency (Livsmedelsverket) licensed under <1>Creative Commons Attribution 4.0 (CC BY 4.0)</1>. Supported languages: <3>Swedish (sv)</3> and <5>English (en)</5>. <7>Swedish Food Composition Database</7>"
     },
+    "cofid": {
+      "providerCardLicence": "Contains public sector information licensed under the <1>Open Government Licence v3.0</1>, from McCance and Widdowson's Composition of Foods Integrated Dataset 2021. Values are per 100 g (per 100 ml for alcoholic drinks). English only. <3>CoFID on GOV.UK</3>",
+      "providerSpecificDescription": "McCance and Widdowson's Composition of Foods Integrated Dataset (CoFID) is the UK's official food composition table, with about 2,900 generic foods such as fruit, vegetables, meat and home-cooked dishes. It is free, public and needs no credentials; the server downloads the dataset from GOV.UK on first search. It contains public sector information licensed under the <1>Open Government Licence v3.0</1>. For packaged products, use Open Food Facts barcode scanning."
+    },
     "foodExerciseDataProviders": {
       "title": "Food & Exercise Data Providers",
       "description": "Configure external food and exercise data sources and synchronize data with Garmin Connect",

@@ -201,6 +201,7 @@ export default defineConfig({
             { text: 'External Providers', link: '/features/settings/external-providers' },
             { text: 'Canadian Nutrient File', link: '/features/settings/canadian-nutrient-file' },
             { text: 'Swedish Food Agency', link: '/features/settings/livsmedelsverket' },
+            { text: 'CoFID (UK)', link: '/features/settings/cofid' },
             { text: 'Liftosaur', link: '/features/settings/liftosaur' },
             { text: 'Intervals.icu', link: '/features/settings/intervals' },
             { text: 'Nutrient Display', link: '/features/settings/nutrient-display-settings' },

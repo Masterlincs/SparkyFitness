@@ -1,6 +1,6 @@
 # AGENTS.md
 
-_Last updated: 2026-11-16_
+_Last updated: 2026-11-17_
 
 SparkyFitness Server is the backend API package for the SparkyFitness monorepo. Use this file as the primary guide for work inside `SparkyFitnessServer/`.
 
@@ -270,7 +270,7 @@ When searching, ignore noisy/generated directories unless you explicitly need th
 ### Integrations and Background Work
 
 - Provider-specific adapters live under `integrations/`; coordinating logic usually lives in `services/` and persistence in `models/`
-- Current adapters span food/nutrition (OpenFoodFacts, FatSecret, Nutritionix, USDA, Mealie, Tandoor, Norish, SwissFood, Yazio), fitness devices (Garmin Connect sync plus FIT file import via `integrations/garminfit/` + `services/fitImportService.ts`, Withings, Fitbit, Oura, Polar, Strava, COROS, Hevy, Liftosaur, Intervals.icu), exercise databases (Wger, FreeExerciseDB), and health-data import (Google Health, generic/mobile health data)
+- Current adapters span food/nutrition (OpenFoodFacts, FatSecret, Nutritionix, USDA, Mealie, Tandoor, Norish, SwissFood, Yazio, CoFID; CoFID has no API, so `integrations/cofid/` downloads the GOV.UK workbook once per process and reads it with `utils/xlsxReader.ts`), fitness devices (Garmin Connect sync plus FIT file import via `integrations/garminfit/` + `services/fitImportService.ts`, Withings, Fitbit, Oura, Polar, Strava, COROS, Hevy, Liftosaur, Intervals.icu), exercise databases (Wger, FreeExerciseDB), and health-data import (Google Health, generic/mobile health data)
 - Scheduled jobs include backups, session cleanup, and provider sync loops for Withings, Garmin, Fitbit, Oura, Polar, Strava, COROS, Google Health, Hevy, Liftosaur, and Intervals.icu. Hevy's daily frequency is due at 21:00 in the user's timezone and runs at most once per local day; manual connections are skipped.
 - Hevy imports: `integrations/hevy/hevyService.ts` reads workout and exercise-template pages before processing. `hevyDataProcessor.ts` matches templates by id and maps primary/secondary muscles; `hevyExerciseRepository.ts` fills only empty muscle columns on owned Hevy library rows before the diary snapshots them. A full-history re-sync refreshes older Hevy snapshots in place with this metadata.
 - Schedule a job with `scheduleJob(name, expression, fn)` from `services/scheduledJobs.ts` (lint forbids importing `node-cron` elsewhere) and give it a unique name. Every instance registers every job and the first to claim a tick in `system.scheduled_jobs` runs it, so with several instances each tick runs on at most one. A tick is skipped everywhere when shutdown begins during its claim or the claim query fails (node-cron then skips the tick). Nothing is held while a job runs: a run longer than its interval can meet the next tick on another instance, so a long job claims what it works on or is safe to run twice, as on one instance. `{ local: true }` is only for per-instance reconciliation that must run everywhere

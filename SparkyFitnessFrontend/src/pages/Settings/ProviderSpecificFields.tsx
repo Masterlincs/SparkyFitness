@@ -834,6 +834,27 @@ export const ProviderSpecificFields = ({
         </div>
       )}
 
+      {provider.provider_type === 'cofid' && (
+        <div className="col-span-2 space-y-2">
+          <p className="text-sm text-muted-foreground">
+            <Trans
+              i18nKey="settings.cofid.providerSpecificDescription"
+              defaults="McCance and Widdowson's Composition of Foods Integrated Dataset (CoFID) is the UK's official food composition table, with about 2,900 generic foods such as fruit, vegetables, meat and home-cooked dishes. It is free, public and needs no credentials; the server downloads the dataset from GOV.UK on first search. It contains public sector information licensed under the <1>Open Government Licence v3.0</1>. For packaged products, use Open Food Facts barcode scanning."
+              components={{
+                1: (
+                  <a
+                    href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline font-medium"
+                  />
+                ),
+              }}
+            />
+          </p>
+        </div>
+      )}
+
       {provider.provider_type === 'canadian-nutrient-file' && (
         <div className="col-span-2 space-y-2">
           <p className="text-sm text-muted-foreground">
