@@ -11200,5 +11200,28 @@
     "mealPlanAdded": "Added to your shopping list",
     "mealPlanAddedDetail": "{{added}} new items, {{updated}} updated.",
     "addMealPlan": "Add to shopping list"
+  },
+  "quickLog": {
+    "open": "Log by voice or text",
+    "title": "Log by voice or text",
+    "description": "Say or type what you ate, for example \"two eggs and a slice of toast\". Check the matches, then log them all at once.",
+    "placeholder": "two eggs, a slice of toast and a cup of tea",
+    "textLabel": "What did you eat?",
+    "find": "Find foods",
+    "food": "Food",
+    "portion": "Portion",
+    "quantity": "Quantity",
+    "noMatch": "No match found. Ask Sparky, or search for it in Add Food.",
+    "askSparky": "Ask Sparky instead",
+    "askSparkyDraft": "Log for {{meal}} on {{date}}: {{food}}",
+    "log": "Log {{count}} foods ({{energy}} {{unit}})",
+    "logged": "Logged {{count}} foods",
+    "failedToMatch": "Could not look up those foods.",
+    "failedToLog": "Could not log the foods.",
+    "source": {
+      "library": "My foods",
+      "intake24": "Intake24",
+      "cofid": "CoFID"
+    }
   }
 }

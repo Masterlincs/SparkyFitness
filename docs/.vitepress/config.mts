@@ -162,6 +162,7 @@ export default defineConfig({
             { text: 'Custom Food Form', link: '/features/food/custom-food-form' },
             { text: 'Food Search', link: '/features/food/food-search' },
             { text: 'Shopping List', link: '/features/food/shopping-list' },
+            { text: 'Log by Voice or Text', link: '/features/food/voice-logging' },
           ],
         },
         {

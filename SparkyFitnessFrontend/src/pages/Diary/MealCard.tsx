@@ -16,6 +16,7 @@ import {
   Trash2,
   History,
   Utensils,
+  Mic,
   ClipboardCopy,
   Copy,
   PlusCircle,
@@ -23,6 +24,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import EnhancedFoodSearch from '../../components/FoodSearch/FoodSearch';
+import QuickLogDialog from '@/components/FoodSearch/QuickLogDialog';
 import { FOOD_SEARCH_DIALOG_CONTENT_CLASS } from '../../components/FoodSearch/foodSearchDialogLayout';
 import { usePreferences } from '@/contexts/PreferencesContext';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -148,6 +150,7 @@ const MealCard = ({
 
   // Check if food search is open to handle state changes
   const isFoodSearchOpen = shouldOpenFoodSearch || internalFoodSearchOpen;
+  const [isQuickLogOpen, setIsQuickLogOpen] = useState(false);
 
   const handleFoodSearchOpenChange = (open: boolean) => {
     setInternalFoodSearchOpen(open);
@@ -261,6 +264,23 @@ const MealCard = ({
               </span>
             </div>
             <div className="flex flex-wrap gap-2 sm:gap-4 justify-end">
+              <Button
+                size="default"
+                variant="outline"
+                onClick={() => setIsQuickLogOpen(true)}
+                title={t('quickLog.open', 'Log by voice or text')}
+                aria-label={t('quickLog.open', 'Log by voice or text')}
+              >
+                <Mic className="w-4 h-4" />
+              </Button>
+              {isQuickLogOpen && (
+                <QuickLogDialog
+                  open
+                  onOpenChange={setIsQuickLogOpen}
+                  mealType={meal.type}
+                  date={selectedDate}
+                />
+              )}
               <Dialog
                 open={isFoodSearchOpen}
                 onOpenChange={handleFoodSearchOpenChange}

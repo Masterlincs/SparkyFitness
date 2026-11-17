@@ -14,7 +14,11 @@ const TOKEN_STATS_STORAGE_KEY = 'chat_token_stats';
 
 interface ChatbotVisibilityContextType {
   isChatOpen: boolean;
-  openChat: () => void;
+  /** Opens the chat, optionally with a message waiting in the composer. */
+  openChat: (draft?: string) => void;
+  /** A message handed to the composer by openChat, until it takes it. */
+  pendingDraft: string | null;
+  clearPendingDraft: () => void;
   closeChat: () => void;
   toggleChat: () => void;
   showTokenStats: boolean;
@@ -51,7 +55,12 @@ export const ChatbotVisibilityProvider: React.FC<{ children: ReactNode }> = ({
     localStorage.setItem(TOKEN_STATS_STORAGE_KEY, String(showTokenStats));
   }, [showTokenStats]);
 
-  const openChat = () => setIsChatOpen(true);
+  const [pendingDraft, setPendingDraft] = useState<string | null>(null);
+  const openChat = (draft?: string) => {
+    if (draft) setPendingDraft(draft);
+    setIsChatOpen(true);
+  };
+  const clearPendingDraft = () => setPendingDraft(null);
   const closeChat = () => setIsChatOpen(false);
   const toggleChat = () => setIsChatOpen((prev) => !prev);
 
@@ -60,6 +69,8 @@ export const ChatbotVisibilityProvider: React.FC<{ children: ReactNode }> = ({
       value={{
         isChatOpen,
         openChat,
+        pendingDraft,
+        clearPendingDraft,
         closeChat,
         toggleChat,
         showTokenStats,

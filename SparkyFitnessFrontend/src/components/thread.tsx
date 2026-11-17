@@ -48,7 +48,7 @@ import {
   RefreshCwIcon,
   SquareIcon,
 } from 'lucide-react';
-import { Fragment, useRef, type FC } from 'react';
+import { Fragment, useEffect, useRef, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useUserAIPreferences } from '@/hooks/AI/useAIServiceSettings';
 import { useVoiceInput } from '@/hooks/AI/useVoiceInput';
@@ -207,6 +207,16 @@ const Composer: FC = () => {
   const voiceEnabled =
     !!preferences && preferences.voice_input_enabled !== false;
   const waveformRef = useRef<HTMLDivElement>(null);
+  // A draft handed over by another screen ("Ask Sparky" from quick log) goes
+  // into an empty composer once; a message being typed is never replaced.
+  const { pendingDraft, clearPendingDraft } = useChatbotVisibility();
+  useEffect(() => {
+    if (!pendingDraft) return;
+    if (!aui.composer().getState().text.trim()) {
+      aui.composer().setText(pendingDraft);
+    }
+    clearPendingDraft();
+  }, [pendingDraft, clearPendingDraft, aui]);
   const voice = useVoiceInput({
     enabled: voiceEnabled && !running,
     serviceId: preferences?.active_voice_ai_service_id ?? null,
