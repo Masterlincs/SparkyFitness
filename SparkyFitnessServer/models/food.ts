@@ -12,7 +12,7 @@ import {
   toImageArray,
   resolveImageInput,
 } from '../utils/imageLocalizer.js';
-import { sanitizeNotes } from '@workspace/shared';
+import { normalizeNutriscoreGrade, sanitizeNotes } from '@workspace/shared';
 import type {
   NutrientValue,
   NutrientFields,
@@ -46,6 +46,7 @@ export interface FoodInput extends NutrientFields {
   is_custom?: boolean | string | null;
   shared_with_public?: boolean | string | null;
   provider_verified?: boolean | string | null;
+  nutriscore_grade?: string | null;
   is_quick_food?: boolean | string | null;
   images?: string[] | null;
   image_url?: string | null;
@@ -181,7 +182,7 @@ async function searchFoods(
   try {
     let query = `
       SELECT
-        f.id, f.name, f.brand, f.barcode, f.is_custom, f.user_id, f.shared_with_public, f.provider_external_id, f.provider_type, f.provider_verified, f.images, f.notes,
+        f.id, f.name, f.brand, f.barcode, f.is_custom, f.user_id, f.shared_with_public, f.provider_external_id, f.provider_type, f.provider_verified, f.nutriscore_grade, f.images, f.notes,
         ${DEFAULT_VARIANT_JSON_SQL}
       FROM foods f
       ${PREFERRED_DEFAULT_VARIANT_JOIN_SQL}
@@ -245,8 +246,8 @@ async function createFoodWithClient(client: PoolClient, foodData: FoodInput) {
   // 1. Create the food entry
   const foodResult = await client.query(
     `INSERT INTO foods (
-        name, is_custom, user_id, brand, barcode, provider_external_id, shared_with_public, provider_type, provider_verified, is_quick_food, images, notes, created_at, updated_at
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11::jsonb, $12, now(), now()) RETURNING id, name, brand, is_custom, user_id, shared_with_public, is_quick_food, provider_external_id, provider_type, provider_verified, images, notes`,
+        name, is_custom, user_id, brand, barcode, provider_external_id, shared_with_public, provider_type, provider_verified, is_quick_food, images, notes, nutriscore_grade, created_at, updated_at
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11::jsonb, $12, $13, now(), now()) RETURNING id, name, brand, is_custom, user_id, shared_with_public, is_quick_food, provider_external_id, provider_type, provider_verified, nutriscore_grade, images, notes`,
     [
       foodData.name,
       sanitizeBoolean(foodData.is_custom) ?? true,
@@ -260,6 +261,7 @@ async function createFoodWithClient(client: PoolClient, foodData: FoodInput) {
       sanitizeBoolean(foodData.is_quick_food) ?? false,
       JSON.stringify(resolveImageInput(foodData)),
       sanitizeNotes(foodData.notes) ?? null,
+      normalizeNutriscoreGrade(foodData.nutriscore_grade),
     ]
   );
   const newFood = foodResult.rows[0];
@@ -529,7 +531,7 @@ async function findFoodByBarcode(barcode: string, userId: string) {
   try {
     const result = await client.query(
       `SELECT
-        f.id, f.name, f.brand, f.barcode, f.is_custom, f.user_id, f.shared_with_public, f.provider_external_id, f.provider_type, f.provider_verified, f.images, f.notes,
+        f.id, f.name, f.brand, f.barcode, f.is_custom, f.user_id, f.shared_with_public, f.provider_external_id, f.provider_type, f.provider_verified, f.nutriscore_grade, f.images, f.notes,
         ${DEFAULT_VARIANT_JSON_SQL}
       FROM foods f
       ${PREFERRED_DEFAULT_VARIANT_JOIN_SQL}
@@ -548,7 +550,7 @@ async function getFoodById(foodId: string, userId: string) {
   try {
     const result = await client.query(
       `SELECT
-        f.id, f.name, f.brand, f.barcode, f.is_custom, f.user_id, f.shared_with_public, f.provider_external_id, f.provider_type, f.provider_verified, f.images, f.notes,
+        f.id, f.name, f.brand, f.barcode, f.is_custom, f.user_id, f.shared_with_public, f.provider_external_id, f.provider_type, f.provider_verified, f.nutriscore_grade, f.images, f.notes,
         ${DEFAULT_VARIANT_JSON_SQL}
       FROM foods f
       ${PREFERRED_DEFAULT_VARIANT_JOIN_SQL}
@@ -765,7 +767,7 @@ async function getFoodsWithPagination(
 
     let query = `
       SELECT
-        f.id, f.name, f.brand, f.barcode, f.is_custom, f.user_id, f.shared_with_public, f.provider_external_id, f.provider_type, f.provider_verified, f.images, f.notes,
+        f.id, f.name, f.brand, f.barcode, f.is_custom, f.user_id, f.shared_with_public, f.provider_external_id, f.provider_type, f.provider_verified, f.nutriscore_grade, f.images, f.notes,
         ${DEFAULT_VARIANT_JSON_SQL}
       FROM foods f
       ${PREFERRED_DEFAULT_VARIANT_JOIN_SQL}
@@ -1709,7 +1711,7 @@ async function findFoodByProviderExternalId(
       // a duplicate alongside it. The caller is responsible for un-hiding what
       // it reuses -- see refreshExistingExternalFoodMetadata. is_quick_food is
       // selected so it can make that decision.
-      `SELECT f.id, f.name, f.brand, f.barcode, f.is_custom, f.user_id, f.shared_with_public, f.provider_external_id, f.provider_type, f.provider_verified, f.images, f.notes, f.is_quick_food,
+      `SELECT f.id, f.name, f.brand, f.barcode, f.is_custom, f.user_id, f.shared_with_public, f.provider_external_id, f.provider_type, f.provider_verified, f.nutriscore_grade, f.images, f.notes, f.is_quick_food,
               fv.id AS default_variant_id, fv.serving_size, fv.serving_unit,
               ${DEFAULT_VARIANT_JSON_SQL}
        FROM foods f

@@ -834,6 +834,27 @@ export const ProviderSpecificFields = ({
         </div>
       )}
 
+      {provider.provider_type === 'intake24' && (
+        <div className="col-span-2 space-y-2">
+          <p className="text-sm text-muted-foreground">
+            <Trans
+              i18nKey="settings.intake24.providerSpecificDescription"
+              defaults="Intake24 lists about 2,500 foods as people in the UK eat them, with nutrients from the National Diet and Nutrition Survey and household portions such as a slice, a medium egg or a standard bag of crisps. It is free, public and needs no credentials; the server downloads the data on first search. It contains public sector information licensed under the <1>Open Government Licence v3.0</1>."
+              components={{
+                1: (
+                  <a
+                    href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline font-medium"
+                  />
+                ),
+              }}
+            />
+          </p>
+        </div>
+      )}
+
       {provider.provider_type === 'cofid' && (
         <div className="col-span-2 space-y-2">
           <p className="text-sm text-muted-foreground">

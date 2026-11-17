@@ -13,6 +13,7 @@ const PROVIDER_DISPLAY_NAMES: Record<string, string> = {
   'canadian-nutrient-file': 'Canadian Nutrient File',
   livsmedelsverket: 'Swedish Food Agency (Livsmedelsverket)',
   cofid: "McCance and Widdowson's CoFID (UK)",
+  intake24: 'UK Foods & Portions (Intake24)',
   nutritionix: 'Nutritionix',
 };
 

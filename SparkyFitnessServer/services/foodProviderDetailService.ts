@@ -30,6 +30,7 @@ import { getSwissFoodDetails } from '../integrations/swissfood/swissFoodService.
 import { getCanadianNutrientFoodDetails } from '../integrations/cnf/cnfService.js';
 import { getLivsmedelsverketFoodDetails } from '../integrations/livsmedelsverket/livsmedelsverketService.js';
 import { getCofidFoodDetails } from '../integrations/cofid/cofidService.js';
+import { getIntake24FoodDetails } from '../integrations/intake24/intake24Service.js';
 import {
   getFatSecretNutrients,
   getMealieFoodDetails,
@@ -338,6 +339,10 @@ export async function fetchProviderFoodDetails({
 
     case 'cofid': {
       return await getCofidFoodDetails(externalId);
+    }
+
+    case 'intake24': {
+      return await getIntake24FoodDetails(externalId);
     }
   }
 

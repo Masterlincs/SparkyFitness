@@ -14,6 +14,7 @@ import { BarcodeScannerDialog } from './BarcodeScannerDialog';
 import { MarkdownEditor } from '@/components/ui/MarkdownEditor';
 import { ProviderNutrientViewer } from './ProviderNutrientViewer';
 import ProviderVerifiedBadge from './ProviderVerifiedBadge';
+import NutriScoreBadge from './NutriScoreBadge';
 import type { Food, FoodVariant } from '@/types/food';
 
 import { useCustomNutrients } from '@/hooks/Foods/useCustomNutrients';
@@ -315,6 +316,9 @@ const CustomFoodForm = ({
                 : t('customFoodForm.titleAdd', 'Add Custom Food')}
             </CardTitle>
             {food?.provider_verified ? <ProviderVerifiedBadge /> : null}
+            {food?.nutriscore_grade ? (
+              <NutriScoreBadge grade={food.nutriscore_grade} />
+            ) : null}
           </div>
         </CardHeader>
         <CardContent>

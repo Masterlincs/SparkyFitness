@@ -1,5 +1,5 @@
 import { FormFoodVariant } from '@/utils/foodForm';
-import type { FoodProviderType } from '@workspace/shared';
+import type { FoodProviderType, NutriscoreGrade } from '@workspace/shared';
 
 export type GlycemicIndex =
   'None' | 'Very Low' | 'Low' | 'Medium' | 'High' | 'Very High';
@@ -81,6 +81,7 @@ export interface Food {
   provider_external_id?: string;
   provider_type?: FoodProviderType | 'nutritionix';
   provider_verified?: boolean;
+  nutriscore_grade?: NutriscoreGrade | null;
   recipe_has_nutrition?: boolean;
   recipe_servings?: number | null;
   default_variant?: FoodVariant;

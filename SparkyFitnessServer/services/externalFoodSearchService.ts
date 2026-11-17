@@ -20,6 +20,7 @@ import { searchSwissFoods } from '../integrations/swissfood/swissFoodService.js'
 import { searchCanadianNutrientFoods } from '../integrations/cnf/cnfService.js';
 import { searchLivsmedelsverketFoods } from '../integrations/livsmedelsverket/livsmedelsverketService.js';
 import { searchCofidFoods } from '../integrations/cofid/cofidService.js';
+import { searchIntake24Foods } from '../integrations/intake24/intake24Service.js';
 import { isPublicFoodProvider } from '@workspace/shared';
 import {
   searchFatSecretFoods,
@@ -482,6 +483,13 @@ export async function searchProviderFoods(
 
     case 'cofid': {
       const result = await searchCofidFoods(query, page, pageSize);
+      foods = result.foods;
+      pagination = result.pagination;
+      break;
+    }
+
+    case 'intake24': {
+      const result = await searchIntake24Foods(query, page, pageSize);
       foods = result.foods;
       pagination = result.pagination;
       break;

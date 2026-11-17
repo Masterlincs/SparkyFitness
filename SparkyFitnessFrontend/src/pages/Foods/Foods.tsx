@@ -43,6 +43,7 @@ import {
 import FoodUnitSelector from '@/components/FoodUnitSelector';
 import MealManagement from './MealManagement';
 import MealPlanCalendar from './MealPlanCalendar';
+import ShoppingList from './ShoppingList';
 import CustomFoodForm from '@/components/FoodSearch/CustomFoodForm';
 import { Meal, MealFilter } from '@/types/meal';
 import { useFoodDatabaseManager } from '@/hooks/Foods/useFoodDatabaseManager';
@@ -796,6 +797,8 @@ const FoodDatabaseManager = () => {
 
       {/* Meal Plan Calendar Section */}
       <MealPlanCalendar />
+
+      <ShoppingList />
 
       <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
         <DialogContent

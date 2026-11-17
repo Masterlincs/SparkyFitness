@@ -135,6 +135,10 @@ const PROVIDER_PORTALS: Record<string, { label: string; url: string }> = {
     label: 'Swedish Food Agency (Livsmedelsverket) Open Data',
     url: 'https://www.livsmedelsverket.se/en/about-us/open-data/food-composition-data/',
   },
+  intake24: {
+    label: 'Intake24 open source',
+    url: 'https://intake24.org/open-source',
+  },
   cofid: {
     label: 'CoFID on GOV.UK',
     url: 'https://www.gov.uk/government/publications/composition-of-foods-integrated-dataset-cofid',
@@ -812,6 +816,33 @@ export const ProviderCard = ({
                 link: (
                   <a
                     href="https://naehrwertdaten.ch/en/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline font-medium ml-1"
+                  />
+                ),
+              }}
+            />
+          </p>
+        )}
+
+        {provider.provider_type === 'intake24' && (
+          <p className="text-xs text-muted-foreground mt-1.5 max-w-2xl leading-relaxed">
+            <Trans
+              i18nKey="settings.intake24.providerCardLicence"
+              defaults="Contains the Intake24 food database, © Crown copyright and Newcastle University, licensed under the <1>Open Government Licence v3.0</1>. Nutrients from the National Diet and Nutrition Survey databank, with UK household portion sizes. English only. <3>Intake24</3>"
+              components={{
+                1: (
+                  <a
+                    href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline font-medium"
+                  />
+                ),
+                3: (
+                  <a
+                    href="https://intake24.org/open-source"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary hover:underline font-medium ml-1"

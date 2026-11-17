@@ -54,6 +54,7 @@ export * from './schemas/api/RunProgram.api.zod.ts';
 export * from './schemas/api/FitnessTest.api.zod.ts';
 export * from './schemas/api/RunGoals.api.zod.ts';
 export * from './schemas/api/Shoes.api.zod.ts';
+export * from './schemas/api/ShoppingList.api.zod.ts';
 export * from './schemas/api/PlateInventory.api.zod.ts';
 export * from './schemas/api/ActionTags.api.zod.ts';
 export * from './utils/actionTagLink.ts';
@@ -271,6 +272,7 @@ export * from './schemas/database/RunPrograms.zod.ts';
 export * from './schemas/database/RunGoals.zod.ts';
 export * from './schemas/database/IntervalsNutritionPushes.zod.ts';
 export * from './schemas/database/Shoes.zod.ts';
+export * from './schemas/database/ShoppingListItems.zod.ts';
 export * from './schemas/database/PlateInventories.zod.ts';
 export * from './schemas/database/ActionTags.zod.ts';
 export * from './schemas/database/CustomRunPrograms.zod.ts';
@@ -389,3 +391,5 @@ export {
 export * from './schemas/api/Chat.api.zod.ts';
 
 export * from './utils/chatTools.ts';
+
+export * from './utils/nutriscore.ts';

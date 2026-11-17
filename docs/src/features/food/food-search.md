@@ -7,6 +7,10 @@ When you click on Add food, you'll have the option to search for recent foods:
 You'll also have the option to search for Food online using your configured Food data providers or even scan a Barcode:
 <img width="1101" height="733" alt="grafik" src="https://github.com/user-attachments/assets/ed2dfd2c-cd8f-4d57-8b23-f4171ec89cd5" />
 
+## Nutri-Score
+
+Open Food Facts products that have a Nutri-Score show a coloured **Nutri A** to **Nutri E** badge in search results and on the food form. A is the healthiest grade and E the least healthy. The grade is kept when you add the product to your library. Foods from other sources, and products Open Food Facts has not graded, show no badge.
+
 ## Barcode Sources and Alternatives
 
 A barcode scan first returns a saved local food or the best match from your

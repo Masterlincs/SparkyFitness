@@ -332,6 +332,7 @@ export const saveFood = async (
       provider_external_id: foodData.provider_external_id,
       provider_type: foodData.provider_type,
       provider_verified: foodData.provider_verified,
+      nutriscore_grade: foodData.nutriscore_grade,
       // Ordered image list, same contract as the update branch. Without this
       // a newly created food drops its images entirely: uploads still landed
       // (the server appends them by placeholder) but any URL already in the

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Edit, Share2, Sparkles, Star } from 'lucide-react';
 import { NutrientGrid } from './NutrientGrid';
 import ProviderVerifiedBadge from './ProviderVerifiedBadge';
+import NutriScoreBadge from './NutriScoreBadge';
 import AllergenBadges from '@/components/AllergenBadges';
 import type { Food } from '@/types/food';
 import type { Meal } from '@/types/meal';
@@ -191,6 +192,9 @@ const FoodResultCard = ({
               )}
               {isFood && foodItem.provider_verified && (
                 <ProviderVerifiedBadge />
+              )}
+              {isFood && foodItem.nutriscore_grade && (
+                <NutriScoreBadge grade={foodItem.nutriscore_grade} />
               )}
               {isFood &&
                 foodItem.default_variant?.source === 'ai_estimate' &&

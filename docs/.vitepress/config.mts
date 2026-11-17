@@ -161,6 +161,7 @@ export default defineConfig({
             { text: 'Food Database Manager', link: '/features/food/food-database-manager' },
             { text: 'Custom Food Form', link: '/features/food/custom-food-form' },
             { text: 'Food Search', link: '/features/food/food-search' },
+            { text: 'Shopping List', link: '/features/food/shopping-list' },
           ],
         },
         {
@@ -202,6 +203,7 @@ export default defineConfig({
             { text: 'Canadian Nutrient File', link: '/features/settings/canadian-nutrient-file' },
             { text: 'Swedish Food Agency', link: '/features/settings/livsmedelsverket' },
             { text: 'CoFID (UK)', link: '/features/settings/cofid' },
+            { text: 'Intake24 (UK)', link: '/features/settings/intake24' },
             { text: 'Liftosaur', link: '/features/settings/liftosaur' },
             { text: 'Intervals.icu', link: '/features/settings/intervals' },
             { text: 'Nutrient Display', link: '/features/settings/nutrient-display-settings' },

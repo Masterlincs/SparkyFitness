@@ -56,6 +56,7 @@ BEGIN
     'run_programs',
     'run_goals',
     'shoes',
+    'shopping_list_items',
     'plate_inventories',
     'action_tags',
     'custom_run_programs',
@@ -731,6 +732,9 @@ SELECT create_checkin_policy('custom_measurements');
 SELECT create_diary_policy('exercise_entries');
 -- Running shoes belong to the exercise diary, so diary delegates manage them.
 SELECT create_diary_policy('shoes');
+-- The shopping list is food planning, so diary delegates (a partner doing the
+-- shop) can read and tick it off.
+SELECT create_diary_policy('shopping_list_items');
 -- Plate inventories are the person's own gear: owner-only, no delegates.
 SELECT create_owner_policy('plate_inventories');
 -- NFC tag actions can span diary, check-in and medication data, so they are

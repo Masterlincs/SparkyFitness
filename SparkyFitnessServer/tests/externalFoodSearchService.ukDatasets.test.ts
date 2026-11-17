@@ -51,11 +51,19 @@ vi.mock('../integrations/cofid/cofidService.js', () => ({
   searchCofidFoods: vi.fn(),
   getCofidFoodDetails: vi.fn(),
 }));
+vi.mock('../integrations/intake24/intake24Service.js', () => ({
+  searchIntake24Foods: vi.fn(),
+  getIntake24FoodDetails: vi.fn(),
+}));
 
 import {
   searchCofidFoods,
   getCofidFoodDetails,
 } from '../integrations/cofid/cofidService.js';
+import {
+  searchIntake24Foods,
+  getIntake24FoodDetails,
+} from '../integrations/intake24/intake24Service.js';
 import {
   searchProviderFoods,
   resolveProviderCredentials,
@@ -126,5 +134,44 @@ describe('externalFoodSearchService - cofid', () => {
 
     expect(mockGetCofidFoodDetails).toHaveBeenCalledWith('13-532');
     expect((result as { name: string } | null)?.name).toBe(beans.name);
+  });
+});
+
+describe('externalFoodSearchService - intake24', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  const egg = {
+    ...beans,
+    name: 'Boiled eggs',
+    brand: 'Intake24 (UK)',
+    provider_external_id: 'BOEG',
+    provider_type: 'intake24' as const,
+  };
+
+  it('delegates search and details without credentials', async () => {
+    vi.mocked(searchIntake24Foods).mockResolvedValue({
+      foods: [egg],
+      pagination: { page: 1, pageSize: 20, totalCount: 1, hasMore: false },
+    });
+    vi.mocked(getIntake24FoodDetails).mockResolvedValue(egg);
+
+    const res = await searchProviderFoods('user-1', 'intake24', 'egg', {
+      page: 1,
+      pageSize: 20,
+    });
+    const details = await fetchProviderFoodDetails({
+      credentialUserId: 'user-1',
+      dataUserId: 'user-1',
+      providerType: 'intake24',
+      externalId: 'BOEG',
+      language: 'en',
+    });
+
+    expect(searchIntake24Foods).toHaveBeenCalledWith('egg', 1, 20);
+    expect(res.foods).toHaveLength(1);
+    expect(getIntake24FoodDetails).toHaveBeenCalledWith('BOEG');
+    expect((details as { name: string } | null)?.name).toBe('Boiled eggs');
   });
 });

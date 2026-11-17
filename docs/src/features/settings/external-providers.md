@@ -21,6 +21,7 @@ SparkyFitness supports integration with the following health and fitness data pr
 - [Canadian Nutrient File (Health Canada)](/features/settings/canadian-nutrient-file)
 - [Swedish Food Agency (Livsmedelsverket)](/features/settings/livsmedelsverket)
 - [McCance and Widdowson's CoFID (UK)](/features/settings/cofid)
+- [UK Foods & Portions (Intake24)](/features/settings/intake24)
 - Swiss Food Composition Database
 - OpenFoodFacts
 - USDA
@@ -105,6 +106,12 @@ McCance and Widdowson's Composition of Foods Integrated Dataset (CoFID) is the U
 SparkyFitness supports **live on-demand search** of CoFID. The server downloads the dataset from GOV.UK on the first search and keeps it in memory.
 
 For details and licensing information, see the [CoFID Documentation](/features/settings/cofid).
+
+## UK Foods & Portions (Intake24)
+
+Intake24 lists about 2,500 everyday UK foods with nutrients from the National Diet and Nutrition Survey and UK household portions, such as a medium egg, a slice of bread or a standard bag of crisps. It is published under the Open Government Licence v3.0, requires no credentials and is enabled by default.
+
+For details and licensing information, see the [Intake24 Documentation](/features/settings/intake24).
 
 ## Open Food Facts Accounts and Contributions
 

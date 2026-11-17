@@ -412,6 +412,8 @@
   },
   "foods": {
     "providerVerified": "Verified food",
+    "nutriScore": "Nutri-Score {{grade}}",
+    "nutriScoreShort": "Nutri",
     "removeNutrient": "Remove {{nutrient}}",
     "aliasChipInput": {
       "remove": "Remove {{alias}}"
@@ -2419,6 +2421,10 @@
       "confirmDeleteTitle": "Purge Livsmedelsverket Library Foods?",
       "confirmDeleteMessage": "This will permanently delete all Swedish Food Agency items from your personal food library. Past food diary entries logged from these items will be preserved.",
       "providerCardLicence": "Contains information published by the Swedish Food Agency (Livsmedelsverket) licensed under <1>Creative Commons Attribution 4.0 (CC BY 4.0)</1>. Supported languages: <3>Swedish (sv)</3> and <5>English (en)</5>. <7>Swedish Food Composition Database</7>"
+    },
+    "intake24": {
+      "providerCardLicence": "Contains the Intake24 food database, © Crown copyright and Newcastle University, licensed under the <1>Open Government Licence v3.0</1>. Nutrients from the National Diet and Nutrition Survey databank, with UK household portion sizes. English only. <3>Intake24</3>",
+      "providerSpecificDescription": "Intake24 lists about 2,500 foods as people in the UK eat them, with nutrients from the National Diet and Nutrition Survey and household portions such as a slice, a medium egg or a standard bag of crisps. It is free, public and needs no credentials; the server downloads the data on first search. It contains public sector information licensed under the <1>Open Government Licence v3.0</1>."
     },
     "cofid": {
       "providerCardLicence": "Contains public sector information licensed under the <1>Open Government Licence v3.0</1>, from McCance and Widdowson's Composition of Foods Integrated Dataset 2021. Values are per 100 g (per 100 ml for alcoholic drinks). English only. <3>CoFID on GOV.UK</3>",
@@ -11168,5 +11174,31 @@
     "underwater_diving": "Underwater Diving",
     "paragliding": "Paragliding",
     "other": "Other"
+  },
+  "shoppingList": {
+    "title": "Shopping list",
+    "failedToLoad": "Failed to load the shopping list.",
+    "failedToAdd": "Failed to add the item.",
+    "failedToUpdate": "Failed to update the item.",
+    "failedToDelete": "Failed to remove the item.",
+    "failedToClear": "Failed to clear checked items.",
+    "failedToAddMealPlan": "Failed to add the meal plan to the shopping list.",
+    "copied": "Shopping list copied",
+    "copyFailed": "Could not copy the list",
+    "copy": "Copy list",
+    "clearChecked": "Clear ticked ({{count}})",
+    "itemPlaceholder": "Add an item",
+    "itemLabel": "Item",
+    "quantityPlaceholder": "Qty",
+    "quantityLabel": "Quantity",
+    "unitPlaceholder": "Unit",
+    "unitLabel": "Unit",
+    "add": "Add",
+    "empty": "Nothing to buy yet. Add items here, or choose \"Add to shopping list\" on a meal plan.",
+    "fromMealPlan": "Meal plan",
+    "remove": "Remove {{name}}",
+    "mealPlanAdded": "Added to your shopping list",
+    "mealPlanAddedDetail": "{{added}} new items, {{updated}} updated.",
+    "addMealPlan": "Add to shopping list"
   }
 }

@@ -21,6 +21,7 @@ export const FOOD_PROVIDER_TYPES = [
   'canadian-nutrient-file',
   'livsmedelsverket',
   'cofid',
+  'intake24',
 ] as const;
 
 export type FoodProviderType = (typeof FOOD_PROVIDER_TYPES)[number];
@@ -154,6 +155,21 @@ export const FOOD_PROVIDER_REGISTRY: Record<
       'https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/',
     attributionText:
       "McCance and Widdowson's The Composition of Foods Integrated Dataset 2021",
+  },
+  intake24: {
+    id: 'intake24',
+    displayName: 'UK Foods & Portions (Intake24)',
+    isPublic: true,
+    needsDetailFetch: true,
+    supportsBarcode: false,
+    supportsBulkImport: false,
+    supportedLanguages: ['en'],
+    defaultLanguage: 'en',
+    licenseName: 'Open Government Licence v3.0',
+    licenseUrl:
+      'https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/',
+    attributionText:
+      'Intake24 food database, Crown copyright and Newcastle University',
   },
 };
 

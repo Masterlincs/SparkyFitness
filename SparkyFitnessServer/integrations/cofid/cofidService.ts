@@ -5,6 +5,11 @@ import {
 } from '../../utils/outboundUrlPolicy.js';
 import { mapStandardNutrientsByCode } from '../../utils/standardNutrientCodes.js';
 import { readXlsxSheets, type XlsxRow } from '../../utils/xlsxReader.js';
+import {
+  createDatasetLoader,
+  matchDatasetItems,
+  paginate,
+} from '../../utils/datasetSearch.js';
 
 // McCance and Widdowson's Composition of Foods Integrated Dataset (CoFID),
 // the UK's national food composition table, published by Public Health England
@@ -261,12 +266,11 @@ export function mapCofidFood(
 }
 
 // The 2021 dataset is the current release and is not updated in place, so it
-// is kept for the life of the process. A failed download is retried by the
-// next request.
-let datasetPromise: Promise<CofidDataset> | null = null;
+// is kept for the life of the process.
+const datasetLoader = createDatasetLoader(downloadCofidDataset);
 
 export function clearCofidDatasetCache(): void {
-  datasetPromise = null;
+  datasetLoader.clear();
 }
 
 async function downloadCofidDataset(): Promise<CofidDataset> {
@@ -284,13 +288,7 @@ async function downloadCofidDataset(): Promise<CofidDataset> {
 }
 
 export function getCofidDataset(): Promise<CofidDataset> {
-  if (!datasetPromise) {
-    datasetPromise = downloadCofidDataset().catch((error) => {
-      datasetPromise = null;
-      throw error;
-    });
-  }
-  return datasetPromise;
+  return datasetLoader.get();
 }
 
 export async function getCofidFoodDetails(
@@ -301,34 +299,15 @@ export async function getCofidFoodDetails(
   return food ? mapCofidFood(food, dataset.columns) : null;
 }
 
-// "Shepherd's pie" matches "shepherds pie"; commas and brackets in CoFID names
-// ("Beans, baked") do not get in the way of a term.
-function searchText(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/['’]/g, '')
-    .replace(/[^\p{L}\p{N}]+/gu, ' ')
-    .trim();
-}
-
 export async function searchCofidFoods(query: string, page = 1, pageSize = 20) {
   const dataset = await getCofidDataset();
-  const terms = searchText(query).split(' ').filter(Boolean);
-  const matched = dataset.foods.filter((food) => {
-    const name = searchText(food.name);
-    return terms.every((term) => name.includes(term));
-  });
-
-  const offset = (page - 1) * pageSize;
+  const { items, pagination } = paginate(
+    matchDatasetItems(dataset.foods, query, (food) => food.name),
+    page,
+    pageSize
+  );
   return {
-    foods: matched
-      .slice(offset, offset + pageSize)
-      .map((food) => mapCofidFood(food, dataset.columns)),
-    pagination: {
-      page,
-      pageSize,
-      totalCount: matched.length,
-      hasMore: offset + pageSize < matched.length,
-    },
+    foods: items.map((food) => mapCofidFood(food, dataset.columns)),
+    pagination,
   };
 }

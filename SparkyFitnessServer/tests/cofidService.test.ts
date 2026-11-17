@@ -316,9 +316,11 @@ describe('cofidService - search and details', () => {
 
     const page2 = await searchCofidFoods('e', 2, 2);
 
+    // No name starts with "e", so shorter names come first: Wine, red and
+    // Watercress, raw on page 1, then the aubergine and the baked beans.
     expect(page2.foods.map((f) => f.provider_external_id)).toEqual([
       '13-669',
-      '13-669#2',
+      '13-532',
     ]);
     expect(page2.pagination).toEqual({
       page: 2,

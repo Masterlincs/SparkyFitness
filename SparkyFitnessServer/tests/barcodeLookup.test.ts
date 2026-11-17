@@ -226,6 +226,8 @@ describe('mapOpenFoodFactsProduct', () => {
       provider_external_id: '3017620422003',
       provider_type: 'openfoodfacts',
       is_custom: false,
+      // The fixture product has no Nutri-Score.
+      nutriscore_grade: null,
       // No image fields on the fixture product, so nothing to hotlink.
       image_url: null,
       default_variant: {

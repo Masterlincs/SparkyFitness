@@ -1,4 +1,5 @@
 import { z } from 'zod/v4';
+import { NUTRISCORE_GRADES } from '../../utils/nutriscore.ts';
 
 export const FoodVariantSchema = z.object({
   id: z.string().optional(),
@@ -66,6 +67,8 @@ export const NormalizedFoodSchema = z.object({
   provider_external_id: z.string().optional(),
   provider_type: z.string().optional(),
   provider_verified: z.boolean().optional(),
+  // Nutri-Score letter from Open Food Facts; absent when the source has none.
+  nutriscore_grade: z.enum(NUTRISCORE_GRADES).nullable().optional(),
   // Transient Mealie recipe context, never persisted on a library food.
   recipe_has_nutrition: z.boolean().optional(),
   recipe_servings: z.number().finite().positive().nullable().optional(),

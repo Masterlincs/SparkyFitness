@@ -8,6 +8,7 @@ import type { OpenFoodFactsCredentialScope } from './openFoodFactsAuth.js';
 import { log } from '../../config/logging.js';
 import {
   normalizeNutrientUnit,
+  normalizeNutriscoreGrade,
   alcoholGramsForServing,
 } from '@workspace/shared';
 import package$0 from '../../package.json' with { type: 'json' };
@@ -86,6 +87,7 @@ const OFF_FIELDS = [
   'nutriments',
   'allergens_tags',
   'traces_tags',
+  'nutriscore_grade',
   // Product photos: front image preferred, plain image_url as fallback.
   'image_front_url',
   'image_url',
@@ -1454,6 +1456,7 @@ function mapOpenFoodFactsProduct(
     provider_external_id: product.code,
     provider_type: 'openfoodfacts',
     is_custom: false,
+    nutriscore_grade: normalizeNutriscoreGrade(product.nutriscore_grade),
     // Hotlinked in search results; localized on import (see models/food.ts).
     image_url: product.image_front_url || product.image_url || null,
     default_variant: metricVariant,

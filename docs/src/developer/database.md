@@ -118,6 +118,7 @@ These tables are managed by Better Auth and are not exposed through family shari
 | `exercise_entry_sets` | Reps, weights, and sets completed |
 | `exercise_entry_activity_details` | Heart rate, distance, activity data |
 | `shoes` | Running-shoe inventory with retirement mileage; linked from `exercise_entries.shoe_id` |
+| `shopping_list_items` | Shopping list items typed in or added from a meal plan; `food_id` links back to a library food (`ON DELETE SET NULL`) |
 | `plate_inventories` | Bars and plates a person owns, for the plate calculator (one row per user) |
 | `action_tags` | NFC tags: a random tag code plus the saved action a tap runs (owner-only) |
 | `exercise_entry_laps` | Lap split intervals for workouts |

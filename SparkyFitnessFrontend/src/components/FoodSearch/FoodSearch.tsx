@@ -810,6 +810,18 @@ const EnhancedFoodSearch = ({
           hasMore: data.pagination?.hasMore ?? false,
         };
       },
+      intake24: async (term, id, _provider, page) => {
+        const data = await queryClient.fetchQuery(
+          searchFoodsV2Options('intake24', term, id, undefined, undefined, page)
+        );
+        return {
+          items: data.foods.map((food: Food) => ({
+            provider_type: 'intake24' as const,
+            food,
+          })),
+          hasMore: data.pagination?.hasMore ?? false,
+        };
+      },
       cofid: async (term, id, _provider, page) => {
         const data = await queryClient.fetchQuery(
           searchFoodsV2Options('cofid', term, id, undefined, undefined, page)
@@ -1192,6 +1204,8 @@ const EnhancedFoodSearch = ({
           recipe_servings: pinnedFood.recipe_servings ?? food.recipe_servings,
           provider_verified:
             pinnedFood.provider_verified ?? food.provider_verified,
+          nutriscore_grade:
+            pinnedFood.nutriscore_grade ?? food.nutriscore_grade,
           // The details endpoint doesn't always echo the photo back, so fall
           // back to the one the search card already showed.
           image_url: pinnedFood.image_url ?? food.image_url,

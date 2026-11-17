@@ -18,6 +18,7 @@ import {
   CalendarDays,
   MoreHorizontal,
   Copy,
+  ShoppingCart,
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -36,6 +37,7 @@ import {
   useUpdateMealPlanMutation,
 } from '@/hooks/Foods/useMealplanTemplate';
 import { useFoodEntryInvalidation } from '@/hooks/useInvalidateKeys';
+import { useAddMealPlanToShoppingListMutation } from '@/hooks/Foods/useShoppingList';
 
 import { useBulkSelection } from '@/hooks/useBulkSelection';
 import BulkActionToolbar from '@/components/BulkActionToolbar';
@@ -57,6 +59,22 @@ const MealPlanCalendar: React.FC = () => {
   const isMobile = useIsMobile();
   const invalidate = useFoodEntryInvalidation();
   const { data: templates, isLoading } = useMealPlanTemplates(activeUserId);
+  const addToShoppingList = useAddMealPlanToShoppingListMutation();
+  const { mutateAsync: addMealPlanToShoppingList } = addToShoppingList;
+  const handleAddToShoppingList = useCallback(
+    async (templateId: string) => {
+      const result = await addMealPlanToShoppingList(templateId);
+      toast({
+        title: t('shoppingList.mealPlanAdded', 'Added to your shopping list'),
+        description: t(
+          'shoppingList.mealPlanAddedDetail',
+          '{{added}} new items, {{updated}} updated.',
+          { added: result.added, updated: result.updated }
+        ),
+      });
+    },
+    [addMealPlanToShoppingList, t]
+  );
   const { mutateAsync: createMealPlanTemplate } = useCreateMealPlanMutation();
   const { mutateAsync: updateMealPlanTemplate } = useUpdateMealPlanMutation();
   const { mutateAsync: deleteMealPlanTemplate } = useDeleteMealPlanMutation();
@@ -344,6 +362,12 @@ const MealPlanCalendar: React.FC = () => {
                   {t('common.duplicate', 'Duplicate')}
                 </DropdownMenuItem>
                 <DropdownMenuItem
+                  onClick={() => handleAddToShoppingList(template.id!)}
+                >
+                  <ShoppingCart className="mr-2 h-4 w-4" />
+                  {t('shoppingList.addMealPlan', 'Add to shopping list')}
+                </DropdownMenuItem>
+                <DropdownMenuItem
                   onClick={() =>
                     handleTogglePlanActive(template.id!, !template.is_active)
                   }
@@ -382,7 +406,14 @@ const MealPlanCalendar: React.FC = () => {
         },
       },
     ],
-    [t, handleTogglePlanActive, handleEdit, handleDelete, handleDuplicate]
+    [
+      t,
+      handleTogglePlanActive,
+      handleEdit,
+      handleDelete,
+      handleDuplicate,
+      handleAddToShoppingList,
+    ]
   );
 
   return (
