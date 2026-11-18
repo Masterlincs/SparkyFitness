@@ -117,6 +117,7 @@ export const allProvidersFoodSearchQueryKey = (
 export const mealTypesQueryKey = ['mealTypes'] as const;
 
 export const shoesQueryKey = ['shoes'] as const;
+export const shoppingListQueryKey = ['shoppingList'] as const;
 export const plateInventoryQueryKey = ['plateInventory'] as const;
 export const allergenPreferencesQueryKey = ['allergenPreferences'] as const;
 

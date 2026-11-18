@@ -1,3 +1,4 @@
+import type { NutriscoreGrade } from '@workspace/shared';
 export interface ExternalFoodVariant {
   serving_size: number;
   serving_unit: string;
@@ -72,6 +73,8 @@ export interface ExternalFoodItem {
   variants?: ExternalFoodVariant[];
   /** Whether the food is verified by the provider (e.g. Yazio verified foods) */
   provider_verified?: boolean;
+  /** Nutri-Score letter from Open Food Facts, when the source has one. */
+  nutriscore_grade?: NutriscoreGrade | null;
   /** Provider thumbnail URL; absolute, not yet imported into /uploads. */
   image_url?: string | null;
   /** Full-size counterpart of `image_url`, preferred when localizing on save. */

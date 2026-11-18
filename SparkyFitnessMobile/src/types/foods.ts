@@ -1,3 +1,4 @@
+import type { NutriscoreGrade } from '@workspace/shared';
 export interface FoodDefaultVariant {
   id?: string;
   /**
@@ -48,6 +49,8 @@ export interface FoodItem {
   provider_type?: string | null;
   provider_external_id?: string | null;
   provider_verified?: boolean;
+  /** Nutri-Score letter from Open Food Facts, when the source has one. */
+  nutriscore_grade?: NutriscoreGrade | null;
   is_quick_food?: boolean;
   // Present only on items returned by the favorites endpoint.
   favorited_at?: string;

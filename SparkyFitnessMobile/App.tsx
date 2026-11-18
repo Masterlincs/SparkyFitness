@@ -121,6 +121,8 @@ import {
   SafeMealTypeSettings,
   SafeEquipment,
   SafeShoes,
+  SafeShoppingList,
+  SafeQuickLog,
   SafeShoeForm,
   SafePlateInventory,
   SafeAiSettings,
@@ -215,6 +217,7 @@ import { usePendingPresetUpdateStore } from './src/stores/pendingPresetUpdateSto
 import ActiveWorkoutKeepAwake from './src/components/ActiveWorkoutKeepAwake';
 import MedicationReminderReconciler from './src/components/MedicationReminderReconciler';
 import MoodCheckinReminderReconciler from './src/components/MoodCheckinReminderReconciler';
+import OfflineFoodQueueFlusher from './src/components/OfflineFoodQueueFlusher';
 import OralCareReminderReconciler from './src/components/OralCareReminderReconciler';
 import { useNativeIOSTabsActive, useNativeIOSHeadersActive } from './src/services/nativeTabBarPreference';
 import { useWidgetLanguageRefresh } from './src/hooks/useWidgetLanguageRefresh';
@@ -1262,6 +1265,16 @@ function AppContent() {
             options={createStackScreenOptions(t('shoes.title', { defaultValue: 'Shoes' }), { headerBackTitle: t('equipmentHub.title', { defaultValue: 'Equipment' }) })}
           />
           <Stack.Screen
+            name="QuickLog"
+            component={SafeQuickLog}
+            options={createStackScreenOptions(t('quickLog.title', { defaultValue: 'Log by voice or text' }), { headerBackButtonDisplayMode: 'minimal' })}
+          />
+          <Stack.Screen
+            name="ShoppingList"
+            component={SafeShoppingList}
+            options={createStackScreenOptions(t('shoppingList.title', { defaultValue: 'Shopping list' }), { headerBackTitle: t('navigation.library', { defaultValue: 'Library' }) })}
+          />
+          <Stack.Screen
             name="ShoeForm"
             component={SafeShoeForm}
             options={createStackScreenOptions(t('shoes.title', { defaultValue: 'Shoes' }), { headerBackTitle: t('shoes.title', { defaultValue: 'Shoes' }) })}
@@ -1579,6 +1592,7 @@ function AppContent() {
         <ActiveWorkoutKeepAwake />
         <MedicationReminderReconciler />
         <MoodCheckinReminderReconciler />
+        <OfflineFoodQueueFlusher />
         <OralCareReminderReconciler />
         <SafeAreaToast />
         </LightboxProvider>

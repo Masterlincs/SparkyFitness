@@ -51,6 +51,7 @@ import {
   useDebounce,
   useFavorites,
   useProfile,
+  useMealTypes,
 } from '../hooks';
 import {
   filterByOwnership,
@@ -83,6 +84,8 @@ import type { NativeStackHeaderItemMenu } from '@react-navigation/native-stack';
 import { useNativeIOSHeadersActive } from '../services/nativeTabBarPreference';
 import { ALL_PROVIDERS_VALUE } from '../constants/foodProviders';
 import { isFoodSelectionMode } from '../utils/foodPickerMode';
+import OfflineFoodQuickAdd from '../components/OfflineFoodQuickAdd';
+import { saveOfflineFoodSnapshot } from '../services/offlineFoodLog';
 
 type FoodSearchScreenProps = RootStackScreenProps<'FoodSearch'>;
 
@@ -157,6 +160,17 @@ const FoodSearchScreen: React.FC<FoodSearchScreenProps> = ({
   const { favoriteFoods, favoriteMeals } = useFavorites({
     enabled: isConnected,
   });
+  const { mealTypes } = useMealTypes({ enabled: isConnected });
+
+  // Keep the foods offered here, and the meal types, on the phone so they can
+  // be logged offline (OfflineFoodQuickAdd).
+  useEffect(() => {
+    if (!isConnected || mealTypes.length === 0) return;
+    void saveOfflineFoodSnapshot(
+      [...(favoriteFoods ?? []), ...recentFoods, ...topFoods],
+      mealTypes
+    );
+  }, [isConnected, favoriteFoods, recentFoods, topFoods, mealTypes]);
 
   // Per-section cap for the landing lists (foods + meals merged). Mirrors web,
   // which caps each landing section at the user's item_display_limit.
@@ -1330,6 +1344,23 @@ const FoodSearchScreen: React.FC<FoodSearchScreenProps> = ({
             <Icon name="scan" size={20} color={headerActionColor} />
           </Button>
         ) : null}
+        {searchText.length === 0 &&
+        isConnected &&
+        pickerMode === 'log-entry' ? (
+          <Button
+            variant="header"
+            onPress={() =>
+              navigation.navigate('QuickLog', { date, mealTypeId })
+            }
+            hitSlop={8}
+            className="ml-2"
+            accessibilityLabel={t('quickLog.open', {
+              defaultValue: 'Log by voice or text',
+            })}
+          >
+            <Icon name="microphone" size={20} color={headerActionColor} />
+          </Button>
+        ) : null}
       </View>
 
       {multiSelectAvailable && (
@@ -1395,6 +1426,15 @@ const FoodSearchScreen: React.FC<FoodSearchScreenProps> = ({
   // --- Body ---
 
   const renderBody = () => {
+    if (!isConnected && pickerMode === 'log-entry') {
+      return (
+        <OfflineFoodQuickAdd
+          date={date}
+          mealTypeId={mealTypeId}
+          onQueued={closeSearch}
+        />
+      );
+    }
     if (!isConnected) {
       return (
         <View className="flex-1 justify-center items-center px-6">

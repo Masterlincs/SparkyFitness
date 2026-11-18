@@ -734,6 +734,8 @@
       "routesSubtitle": "Draw, import and save routes to follow",
       "equipment": "Equipment",
       "equipmentSubtitle": "Shoes and other gear",
+      "shoppingList": "Shopping list",
+      "shoppingListSubtitle": "What to buy, from your meal plans or typed in",
       "labResults": "Lab results",
       "labResultsSubtitle": "Blood tests and other markers over time"
     },
@@ -4428,6 +4430,7 @@
       "favorite": "Favorite",
       "viewPhoto": "View photo",
       "verifiedFood": "Verified food",
+      "nutriScore": "Nutri-Score {{grade}}",
       "providerExpand_one": "{{provider}}, {{count}} result, tap to {{action}}",
       "providerExpand_other": "{{provider}}, {{count}} results, tap to {{action}}",
       "providerChange": "Provider {{provider}}, tap to change"
@@ -10712,5 +10715,49 @@
     "cancelled": "Cancelled tool",
     "error": "Error:",
     "cancelledReason": "Cancelled reason:"
+  },
+  "offlineFood": {
+    "synced_one": "Added {{count}} food logged offline",
+    "synced_other": "Added {{count}} foods logged offline",
+    "queued": "Saved on your phone",
+    "queuedDetail": "It will be added to your diary when you are back online.",
+    "queueFailed": "Could not save the food on your phone",
+    "noSnapshot": "You are offline. Search foods once while connected and your recent foods will be available here to log offline.",
+    "title": "Offline: your saved foods",
+    "waiting_one": "{{count}} food is waiting to be sent when you are back online.",
+    "waiting_other": "{{count}} foods are waiting to be sent when you are back online.",
+    "hint": "Foods you log now are kept on your phone and added to your diary when you reconnect.",
+    "filter": "Filter foods",
+    "amount": "Amount",
+    "add": "Log offline"
+  },
+  "shoppingList": {
+    "title": "Shopping list",
+    "saveFailed": "Could not update the shopping list",
+    "clearTicked": "Clear ticked",
+    "addPlaceholder": "Add an item",
+    "add": "Add",
+    "loadFailed": "Could not load the shopping list.",
+    "empty": "Nothing to buy yet",
+    "emptyHint": "Add items here, or add a meal plan to your list from the web app.",
+    "remove": "Remove {{name}}"
+  },
+  "quickLog": {
+    "open": "Log by voice or text",
+    "title": "Log by voice or text",
+    "description": "Say or type what you ate, for example \"two eggs and a slice of toast\". Check the matches, then log them all at once.",
+    "placeholder": "two eggs, a slice of toast and a cup of tea",
+    "textLabel": "What did you eat?",
+    "find": "Find foods",
+    "matchFailed": "Could not look up those foods",
+    "logged_one": "Logged {{count}} food",
+    "logged_other": "Logged {{count}} foods",
+    "logFailed": "Could not log the foods",
+    "food": "Food",
+    "portion": "Portion",
+    "quantity": "Quantity",
+    "noMatchMobile": "No match found. Search for it from Add Food, or ask Sparky.",
+    "logButton_one": "Log {{count}} food ({{energy}})",
+    "logButton_other": "Log {{count}} foods ({{energy}})"
   }
 }

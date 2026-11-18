@@ -56,6 +56,7 @@ jest.mock('../../src/services/nativeTabBarPreference', () => ({
 }));
 
 jest.mock('../../src/hooks', () => ({
+  useMealTypes: jest.fn(() => ({ mealTypes: [], defaultMealTypeId: null })),
   useExternalFoodSearch: jest.fn(),
   useExternalProviders: jest.fn(),
   useAllProvidersSearch: jest.fn(),

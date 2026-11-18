@@ -175,6 +175,7 @@ export interface SaveFoodPayload {
   provider_type?: string | null;
   provider_external_id?: string | null;
   provider_verified?: boolean;
+  nutriscore_grade?: string | null;
   custom_nutrients?: Record<string, string | number>;
   // Provider photo carried through import. The server's resolveImageInput
   // prefers `images`, then `image_source_url`, then `image_url`, and localizes

@@ -5,6 +5,7 @@ import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Button from '../ui/Button';
 import MealLibraryRow from '../MealLibraryRow';
 import VerifiedBadge from '../VerifiedBadge';
+import NutriScoreBadge from '../NutriScoreBadge';
 import FoodResultRow from './FoodResultRow';
 import type { FoodRowSelection } from './FoodResultRow';
 import FoodThumbnail from '../FoodThumbnail';
@@ -80,6 +81,12 @@ export const OnlineResultRow: React.FC<OnlineResultRowProps> = ({
             </Text>
             {item.provider_verified ? (
               <VerifiedBadge size="sm" style={{ marginTop: 2 }} />
+            ) : null}
+            {item.nutriscore_grade ? (
+              <NutriScoreBadge
+                grade={item.nutriscore_grade}
+                style={{ marginTop: 2 }}
+              />
             ) : null}
           </View>
           {badge || item.brand ? (

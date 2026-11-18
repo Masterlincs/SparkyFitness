@@ -57,6 +57,7 @@ export function barcodeResultToFoodInfo(
     variantId: variant.id,
     source: isLocal ? 'local' : 'external',
     provider_verified: food.provider_verified,
+    nutriscore_grade: food.nutriscore_grade ?? null,
     images: food.images ?? null,
     image_url: food.image_url ?? null,
     image_source_url: food.image_source_url ?? null,

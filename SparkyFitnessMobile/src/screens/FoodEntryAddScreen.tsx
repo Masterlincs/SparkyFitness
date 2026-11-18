@@ -1060,6 +1060,7 @@ const FoodEntryAddScreen: React.FC<FoodEntryAddScreenProps> = ({
       provider_type: activeItem.provider_type ?? null,
       provider_external_id: activeItem.provider_external_id ?? null,
       provider_verified: activeItem.provider_verified === true,
+      nutriscore_grade: activeItem.nutriscore_grade ?? null,
       is_custom: activeItem.is_custom ?? true,
       serving_size: saveFoodSourceValues.servingSize,
       serving_unit: toPersistedServingUnit({
@@ -1101,6 +1102,7 @@ const FoodEntryAddScreen: React.FC<FoodEntryAddScreenProps> = ({
     activeItem.provider_external_id,
     activeItem.provider_type,
     activeItem.provider_verified,
+    activeItem.nutriscore_grade,
     activeItem.images,
     activeItem.image_url,
     activeItem.image_source_url,

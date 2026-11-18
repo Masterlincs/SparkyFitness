@@ -5,6 +5,7 @@ import Icon from '../Icon';
 import AllergenBadges from '../AllergenBadges';
 import ShareStatusBadge from '../ShareStatusBadge';
 import VerifiedBadge from '../VerifiedBadge';
+import NutriScoreBadge from '../NutriScoreBadge';
 import { deriveShareStatus } from '../../utils/shareStatus';
 import { formatServingUnit } from '../../utils/foodDetails';
 import { foodItemToFoodInfo } from '../../types/foodInfo';
@@ -117,6 +118,12 @@ const FoodResultRow: React.FC<FoodResultRowProps> = ({
             </Text>
             {item.provider_verified ? (
               <VerifiedBadge size="sm" style={{ marginTop: 2 }} />
+            ) : null}
+            {item.nutriscore_grade ? (
+              <NutriScoreBadge
+                grade={item.nutriscore_grade}
+                style={{ marginTop: 2 }}
+              />
             ) : null}
             <ShareStatusBadge status={status} style={{ marginTop: 3 }} />
             {isFavorite && (

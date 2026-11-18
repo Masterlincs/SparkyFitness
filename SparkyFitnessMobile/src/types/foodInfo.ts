@@ -1,3 +1,4 @@
+import type { NutriscoreGrade } from '@workspace/shared';
 import type { FoodItem, TopFoodItem } from './foods';
 import type { ExternalFoodItem, ExternalFoodVariant } from './externalFoods';
 import type { Meal, MealIngredientDraft } from './meals';
@@ -194,6 +195,8 @@ export interface FoodInfoItem {
   variantId?: string;
   externalVariants?: ExternalFoodVariant[];
   provider_verified?: boolean;
+  /** Nutri-Score letter from Open Food Facts, when the source has one. */
+  nutriscore_grade?: NutriscoreGrade | null;
   // Photos. `images` is set for already-saved foods and meals; the two URL
   // fields carry a provider result's photo before it has been imported, and
   // must survive as far as the create payload or the food is saved without
@@ -230,6 +233,7 @@ export const foodItemToFoodInfo = (
   provider_type: item.provider_type ?? undefined,
   provider_external_id: item.provider_external_id ?? undefined,
   provider_verified: item.provider_verified,
+  nutriscore_grade: item.nutriscore_grade ?? null,
   servingSize: item.default_variant.serving_size,
   servingUnit: item.default_variant.serving_unit,
   calories: item.default_variant.calories,
@@ -294,6 +298,7 @@ export const externalFoodItemToFoodInfo = (
   traces: item.traces ?? null,
   externalVariants: item.variants,
   provider_verified: item.provider_verified,
+  nutriscore_grade: item.nutriscore_grade ?? null,
   images: item.images ?? null,
   image_url: item.image_url ?? null,
   image_source_url: item.image_source_url ?? null,

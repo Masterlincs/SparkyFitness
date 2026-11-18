@@ -71,6 +71,8 @@ import WeeklyGoalPlanEditScreen from '../screens/WeeklyGoalPlanEditScreen';
 import MealTypeSettingsScreen from '../screens/MealTypeSettingsScreen';
 import EquipmentScreen from '../screens/EquipmentScreen';
 import ShoesScreen from '../screens/ShoesScreen';
+import ShoppingListScreen from '../screens/ShoppingListScreen';
+import QuickLogScreen from '../screens/QuickLogScreen';
 import ShoeFormScreen from '../screens/ShoeFormScreen';
 import PlateInventoryScreen from '../screens/PlateInventoryScreen';
 import AiSettingsScreen from '../screens/AiSettingsScreen';
@@ -244,6 +246,8 @@ export const SafeCalorieSettings = withErrorBoundary(CalorieSettingsScreen, 'Cal
 export const SafeMealTypeSettings = withErrorBoundary(MealTypeSettingsScreen, 'MealTypeSettings', { canGoBack: true });
 export const SafeEquipment = withErrorBoundary(EquipmentScreen, 'Equipment', { canGoBack: true });
 export const SafeShoes = withErrorBoundary(ShoesScreen, 'Shoes', { canGoBack: true });
+export const SafeShoppingList = withErrorBoundary(ShoppingListScreen, 'ShoppingList', { canGoBack: true });
+export const SafeQuickLog = withErrorBoundary(QuickLogScreen, 'QuickLog', { canGoBack: true });
 export const SafeShoeForm = withErrorBoundary(ShoeFormScreen, 'ShoeForm', { canGoBack: true });
 export const SafePlateInventory = withErrorBoundary(PlateInventoryScreen, 'PlateInventory', { canGoBack: true });
 export const SafeAiSettings = withErrorBoundary(AiSettingsScreen, 'AiSettings', { canGoBack: true });

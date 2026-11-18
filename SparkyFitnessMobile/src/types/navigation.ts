@@ -506,6 +506,8 @@ export type RootStackParamList = {
   MealTypeSettings: undefined;
   Equipment: undefined;
   Shoes: undefined;
+  ShoppingList: undefined;
+  QuickLog: { date?: string; mealTypeId?: string } | undefined;
   ShoeForm: { shoeId?: string };
   PlateInventory: undefined;
   FoodSettings: undefined;
